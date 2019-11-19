@@ -1,0 +1,2 @@
+xampp -> apache -> conf -> extra -> httpd-vhosts.conf
+Windows -> System32 -> drivers -> etc -> hosts

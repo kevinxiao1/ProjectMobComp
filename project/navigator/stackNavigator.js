@@ -1,22 +1,22 @@
+import React from 'react';
 import {createAppContainer} from "react-navigation";
 import {createStackNavigator} from "react-navigation-stack";
-import React from 'react';
+
+
 import Login from '../container/Login';
 import Register from '../container/Register';
 
-import { TouchableOpacity, Text} from "react-native";
-
-
-//import TabNavigator from './tabNavigator';
+import { TouchableOpacity, Text, Image} from "react-native";
+import TabNavigator from '../navigator/tabNavigator';
 
 
 const MainNavigator = createStackNavigator({
     Login:{
         screen : Login,
     },
-    // TabNavigator:{
-    //     screen: TabNavigator,
-    // },
+    TabNavigator:{
+        screen: TabNavigator,
+    },
     Register: {
         screen : Register,
     },
@@ -25,14 +25,13 @@ const MainNavigator = createStackNavigator({
     {
         initialRouteName: 'Login',
         defaultNavigationOptions: ({navigation}) => ({
-            // header: null,
+            header : null,
             headerLeft : null,
             headerRight: (
-                <TouchableOpacity onPress={()=>navigation.goBack()}>
-                    <Text>KANAN</Text>
+                <TouchableOpacity>
+                    <Text> <Image style={{width:50, height: 50, flex: 1}} resizeMode="contain" source={require('../assets/D90.jpg')}></Image></Text>
                 </TouchableOpacity>
             )
-        
         })
     }
 )

@@ -1,12 +1,14 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import StackNavigator from './navigator/stackNavigator';
-export default function App() {
-  return (
-    <StackNavigator></StackNavigator>
-  );
-}
 
+export default class App extends React.Component {
+  render(){
+    return (
+      <StackNavigator></StackNavigator>
+    );
+  }  
+}
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -14,4 +16,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+  input : {
+    borderRadius : 2,
+    borderColor : 'black',
+    margin : 5,
+    borderWidth : 2,
+  }
 });
