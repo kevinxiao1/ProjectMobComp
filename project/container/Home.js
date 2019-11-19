@@ -94,6 +94,17 @@ export default class Home extends React.Component {
         return (
           
           <View style={styles.container}>
+          <View style={styles.cart}>
+          <Text>tes</Text>
+          
+          <Image style= {{margin:5, width : 175, height : 50}}
+          source={require('../assets/logo-plazakamera-recolor.png')
+          }></Image>
+          </View>
+          <View style={styles.borderstyle}>
+
+          </View>
+          
             <Text style={{fontWeight : "bold", color:"blue", fontSize : 20}}>Product Page</Text>
             <FlatList
               data={this.state.listProduct}
@@ -136,4 +147,15 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
       },
+      borderstyle:{
+          width: 1
+      },
+      cart:
+      {
+        alignItems :'right',
+        alignContent:'flex-end',
+        justifyContent:'flex-end'
+        
+      }
+
   });

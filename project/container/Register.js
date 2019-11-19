@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, Button, TextInput, AsyncStorage,} from 'react-native';
+import { StyleSheet, Text, View, Button, TextInput, AsyncStorage, Image} from 'react-native';
 import {NavigationActions, StackActions} from 'react-navigation';
 export default class Login extends React.Component {
     constructor(props){
@@ -146,14 +146,18 @@ export default class Login extends React.Component {
         return (
           
           <View style={styles.container}>
-            <Text style={{fontWeight : "bold", color:"blue", fontSize : 20}}>Register Page</Text>
+          <Image style= {{margin:5, width : 175, height : 50}}
+          source={require('../assets/logo-plazakamera-recolor.png')
+          }></Image>
+            <Text style={{fontWeight : "bold", color:"black", fontSize : 20}}>Register</Text>
+
             <TextInput style={styles.input}
-              placeholder="username"
+              placeholder="Username"
               onChangeText={(t) =>  this.change(t)}
               value={this.state.username}
             />
             <TextInput style={styles.input}
-              placeholder="password"
+              placeholder="Password"
               onChangeText={(t) =>  this.changep(t)}
               value={this.state.password}
             />
@@ -167,10 +171,14 @@ export default class Login extends React.Component {
               onChangeText={(t) =>  this.changea(t)}
               value={this.state.alamat}
             />
+            <View style={styles.stylebutton}>
             <Button
               title="Register"
               onPress={() => this.Register()}
             />
+
+            </View>
+            
             <Text>Already have an Account? <Text style={{color: 'blue'}}onPress={() => this.props.navigation.navigate('Login')}>Log in Here</Text> </Text>
           </View>
         );
@@ -190,5 +198,12 @@ const styles = StyleSheet.create({
     borderColor : 'black',
     margin : 3,
     borderWidth : 2,
+  },
+  stylebutton:
+  {
+    width:160
+
+    
+
   },
 });

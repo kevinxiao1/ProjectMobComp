@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, Button, TextInput, AsyncStorage,} from 'react-native';
+import { StyleSheet, Text, View, Button, TextInput, AsyncStorage, Image} from 'react-native';
 import {NavigationActions, StackActions} from 'react-navigation';
 
 export default class Login extends React.Component {
@@ -17,60 +17,61 @@ export default class Login extends React.Component {
       }
 
       Login = async() =>{
-        if (this.state.username == "admin" && this.state.password == "admin") {
+        this.props.navigation.navigate('TabNavigator');
+        // if (this.state.username == "admin" && this.state.password == "admin") {
           
-        }
-        else{
-          let user = this.state.username;
-          let pass = this.state.password;
-          let arr = [];
-          let request = require("request");
-          let ada = false;
-          let benar = false;
-          const navigator = this.props.navigation;
+        // }
+        // else{
+        //   let user = this.state.username;
+        //   let pass = this.state.password;
+        //   let arr = [];
+        //   let request = require("request");
+        //   let ada = false;
+        //   let benar = false;
+        //   const navigator = this.props.navigation;
 
-          var options = { method: 'GET',
-            url: 'http://lapakkamera.local:8080/handler.php',
-            qs: { method: 'executeQuery', query: 'select * from user' },
-            headers: 
-            { 'cache-control': 'no-cache',
-              Connection: 'keep-alive',
-              Cookie: 'PHPSESSID=41edqtis301hndf2rvm5hicr5r',
-              'Accept-Encoding': 'gzip, deflate',
-              Host: 'lapakkamera.local:8080',
-              'Postman-Token': 'ad5f38f5-182e-4c22-b989-af7d918743f2,2e5ad3d2-f07e-49fb-9e94-278a2df8d0da',
-              'Cache-Control': 'no-cache',
-              Accept: '*/*',
-              'User-Agent': 'PostmanRuntime/7.19.0' } };
+        //   var options = { method: 'GET',
+        //     url: 'http://lapakkamera.local:8080/handler.php',
+        //     qs: { method: 'executeQuery', query: 'select * from user' },
+        //     headers: 
+        //     { 'cache-control': 'no-cache',
+        //       Connection: 'keep-alive',
+        //       Cookie: 'PHPSESSID=41edqtis301hndf2rvm5hicr5r',
+        //       'Accept-Encoding': 'gzip, deflate',
+        //       Host: 'lapakkamera.local:8080',
+        //       'Postman-Token': 'ad5f38f5-182e-4c22-b989-af7d918743f2,2e5ad3d2-f07e-49fb-9e94-278a2df8d0da',
+        //       'Cache-Control': 'no-cache',
+        //       Accept: '*/*',
+        //       'User-Agent': 'PostmanRuntime/7.19.0' } };
 
-          request(options, function (error, response, body) {
-            if (error) throw new Error(error);
+        //   request(options, function (error, response, body) {
+        //     if (error) throw new Error(error);
 
-            console.log(JSON.parse(body));
+        //     console.log(JSON.parse(body));
 
-            arr = JSON.parse(body);
-            for (let i = 0; i < arr.length; i++) {
-              if (arr[i].username == user) {
-                ada = true
-                if (arr[i].password == pass) {
-                  benar = true
-                }
-              }
-            }
-            if (ada == false) {
-              alert("Username belum terdaftar")
-            }
-            else if (benar == false) {
-              alert("password salah")
-            }
-            else{
-              alert("berhasil Login")
-              //response(NavigationActions.navigate({ routeName: 'TabNavigator' }));
-              navigator.navigate('TabNavigator');
-            }
-          }
-          );
-        }
+        //     arr = JSON.parse(body);
+        //     for (let i = 0; i < arr.length; i++) {
+        //       if (arr[i].username == user) {
+        //         ada = true
+        //         if (arr[i].password == pass) {
+        //           benar = true
+        //         }
+        //       }
+        //     }
+        //     if (ada == false) {
+        //       alert("Username belum terdaftar")
+        //     }
+        //     else if (benar == false) {
+        //       alert("password salah")
+        //     }
+        //     else{
+        //       alert("berhasil Login")
+        //       //response(NavigationActions.navigate({ routeName: 'TabNavigator' }));
+        //       navigator.navigate('TabNavigator');
+        //     }
+        //   }
+        //   );
+        // }
       }
 
     //   componentDidMount(){
@@ -135,21 +136,28 @@ export default class Login extends React.Component {
         return (
           
           <View style={styles.container}>
-            <Text style={{fontWeight : "bold", color:"blue", fontSize : 20}}>Login Page</Text>
+            <Image style= {{margin:5, width : 175, height : 50}}
+          source={require('../assets/logo-plazakamera-recolor.png')
+          }></Image>
+          <Text style={{fontWeight : "bold", color:"black", fontSize : 20}}>Login</Text>
             <TextInput style={styles.input}
-              placeholder="username"
+              placeholder="Username"
               onChangeText={(t) =>  this.change(t)}
               value={this.state.username}
             />
             <TextInput style={styles.input}
-              placeholder="password"
+              placeholder="Password"
               onChangeText={(t) =>  this.changep(t)}
               value={this.state.password}
             />
+            <View style={styles.stylebutton}>
             <Button style={styles.input}
               title="Login"
               onPress={() => this.Login()}
             />
+
+            </View>
+            
             <Text>Don't have an Account? <Text style={{color: 'blue'}}onPress={() => this.props.navigation.navigate('Register')}>Register Here</Text> </Text>
           </View>
         );
@@ -168,5 +176,12 @@ const styles = StyleSheet.create({
     borderColor : 'black',
     margin : 3,
     borderWidth : 2,
+  },
+  stylebutton:
+  {
+    width:160
+
+    
+
   },
 });
