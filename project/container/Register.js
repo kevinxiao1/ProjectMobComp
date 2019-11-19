@@ -63,10 +63,14 @@ export default class Login extends React.Component {
         // }).catch((error) => {
         //   console.error(error);
         // });
-
-        let request = require("request");
+        if (this.state.username != "" && this.state.password != "" & this.state.alamat != "" && this.state.nama != "") {
+          let request = require("request");
         let arr = []
         let user = this.state.username
+        let password = this.state.password;
+        let name = this.state.nama;
+        let address = this.state.alamat;
+        let ada = false;
         console.log(user)
 
         var options = { method: 'GET',
@@ -86,17 +90,56 @@ export default class Login extends React.Component {
         request(options, function (error, response, body) {
           if (error) throw new Error(error);
 
-          console.log(JSON.parse(body));
           arr = JSON.parse(body);
           console.log(arr);
           
           for (let i = 0; i < arr.length; i++) {
             if (arr[i].username == user) {
-              alert("username sudah terdaftar")
+              ada = true;
             }
           }
+
+          if (ada == true) {
+            alert("username sudah terdaftar")
+          }
+          else{
+            var request = require("request");
+
+            var options = { method: 'POST',
+              url: 'http://lapakkamera.local:8080/handler.php',
+              qs: 
+              { method: 'executeNonQuery',
+                query: "INSERT INTO USER(username,password,name,address) VALUES('" + user +"','"+ password + "','" + name + "','" + address + "')" },
+              headers: 
+              { 'cache-control': 'no-cache',
+                Connection: 'keep-alive',
+                'Content-Length': '0',
+                Cookie: 'PHPSESSID=36rttgenk4rms491ge6vsttehs',
+                'Accept-Encoding': 'gzip, deflate',
+                Host: 'lapakkamera.local:8080',
+                'Postman-Token': '75bfa28c-0b09-491b-a09b-79de978540ff,a7a6166e-db84-4081-a2a8-7bb243ada1ae',
+                'Cache-Control': 'no-cache',
+                Accept: '*/*',
+                'User-Agent': 'PostmanRuntime/7.19.0',
+                address: address,
+                name: name,
+                password: password,
+                username: user } };
+
+            request(options, function (error, response, body) {
+              if (error) throw new Error(error);
+
+              alert("Berhasil Register!")
+              
+            });
+          }
           
-})
+        })
+        }
+        else{
+          alert("semua field harus terisi")
+        }
+        
       }
 
       render() {
@@ -125,7 +168,7 @@ export default class Login extends React.Component {
               value={this.state.alamat}
             />
             <Button
-              title="Login"
+              title="Register"
               onPress={() => this.Register()}
             />
             <Text>Already have an Account? <Text style={{color: 'blue'}}onPress={() => this.props.navigation.navigate('Login')}>Log in Here</Text> </Text>

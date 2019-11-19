@@ -5,6 +5,7 @@ import {createStackNavigator} from "react-navigation-stack";
 
 import Login from '../container/Login';
 import Register from '../container/Register';
+import Admin from '../container/Register';
 
 import { TouchableOpacity, Text, Image} from "react-native";
 import TabNavigator from '../navigator/tabNavigator';
@@ -19,6 +20,9 @@ const MainNavigator = createStackNavigator({
     },
     Register: {
         screen : Register,
+    },
+    Admin : {
+        screen : Admin
     },
     },
     //konfigurasi
