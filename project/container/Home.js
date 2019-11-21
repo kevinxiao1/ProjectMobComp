@@ -1,6 +1,8 @@
 import React from 'react';
+import { Ionicons } from '@expo/vector-icons';
 import { StyleSheet, Text, View, Button, TextInput, AsyncStorage, FlatList, TouchableOpacity, Dimensions, Image} from 'react-native';
 import {NavigationActions, StackActions} from 'react-navigation';
+
 
 export default class Home extends React.Component {
     constructor(props){
@@ -94,16 +96,23 @@ export default class Home extends React.Component {
         return (
           
           <View style={styles.container}>
-          <View style={styles.cart}>
-          <Text>tes</Text>
-          
-          <Image style= {{margin:5, width : 175, height : 50}}
-          source={require('../assets/logo-plazakamera-recolor.png')
-          }></Image>
-          </View>
-          <View style={styles.borderstyle}>
 
-          </View>
+            <View style={styles.upperPart}>
+                <View style={styles.upperLeft}>
+                    <Text>tes1</Text>
+                </View>
+                <View style={styles.logo}>
+                    <Image style= {{margin:5, width : 175, height : 50}}
+                    source={require('../assets/logo-plazakamera-recolor.png')
+                    }></Image>
+                </View>
+                <View style={styles.cart}>
+                    <Ionicons name ="md-cart" size={50} color ="grey"/>
+                </View>
+                
+            
+                
+            </View>
           
             <Text style={{fontWeight : "bold", color:"blue", fontSize : 20}}>Product Page</Text>
             <FlatList
@@ -129,7 +138,9 @@ const styles = StyleSheet.create({
       backgroundColor: '#fff',
       alignItems: 'center',
       justifyContent: 'center',
-      flexDirection : 'column'
+      //flexDirection : 'column'
+      width: '100%',
+      height: '100%',
     },
     productContainer:{
         width: layar.width* 0.4,
@@ -152,10 +163,35 @@ const styles = StyleSheet.create({
       },
       cart:
       {
-        alignItems :'right',
-        alignContent:'flex-end',
-        justifyContent:'flex-end'
+        flex : 1,
+        //backgroundColor: 'white',
+        alignItems : 'flex-end',
+        justifyContent : 'flex-end'
         
-      }
+      },
+
+      logo:{
+        flex : 1,
+        backgroundColor: 'white',
+        alignItems : 'center',
+        justifyContent : 'center'
+      },
+
+      upperPart:
+      {
+        //flex : 0.5,
+        padding : 15,
+        width : '100%',
+        alignItems : 'center',
+        //justifyContent : 'center',
+        backgroundColor : 'white',
+        flexDirection : 'row'
+      },
+      upperLeft:{
+        flex : 1,
+        backgroundColor: 'white',
+        alignItems : 'flex-start',
+        justifyContent : 'flex-start'
+       },
 
   });

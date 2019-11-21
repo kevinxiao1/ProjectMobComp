@@ -197,11 +197,13 @@ const styles = StyleSheet.create({
     borderRadius : '5%',
     borderColor : 'black',
     margin : 3,
+    height:40,
+    width:200,
     borderWidth : 2,
   },
   stylebutton:
   {
-    width:160
+    width:200
 
     
 
