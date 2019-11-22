@@ -2,7 +2,7 @@ import React from 'react';
 import { Ionicons } from '@expo/vector-icons';
 import { StyleSheet, Text, View, Button, TextInput, AsyncStorage, FlatList, TouchableOpacity, Dimensions, Image} from 'react-native';
 import {NavigationActions, StackActions} from 'react-navigation';
-
+import { SearchBar } from 'react-native-elements';
 
 export default class Home extends React.Component {
     constructor(props){
@@ -11,8 +11,13 @@ export default class Home extends React.Component {
           username: '',
           password: '',
           status : '',
+          search: '',
         }
       }
+
+      updateSearch = search => {
+        this.setState({ search });
+      };
 
       state={
         listProduct: [
@@ -93,8 +98,10 @@ export default class Home extends React.Component {
       }
 
       render() {
+        const { search } = this.state;
         return (
           
+            
           <View style={styles.container}>
 
             <View style={styles.upperPart}>
@@ -111,6 +118,18 @@ export default class Home extends React.Component {
                 </View>
                 
             
+                
+            </View>
+            <View style={styles.search}>
+                <SearchBar style={{width:150}}
+                  placeholder="Search"
+                  onChangeText={this.updateSearch}
+                  value={search}
+                />
+                <View style={styles.stylebutton}>
+                    <Button title="Search"></Button>
+                
+                </View>
                 
             </View>
           
@@ -169,6 +188,9 @@ const styles = StyleSheet.create({
         justifyContent : 'flex-end'
         
       },
+      stylebutton:{
+          //height:150
+      },
 
       logo:{
         flex : 1,
@@ -192,6 +214,14 @@ const styles = StyleSheet.create({
         backgroundColor: 'white',
         alignItems : 'flex-start',
         justifyContent : 'flex-start'
+       },
+       search:{
+        padding : 15,
+        width : '100%',
+        alignItems : 'center',
+        //justifyContent : 'center',
+        backgroundColor : 'white',
+        flexDirection : 'row'
        },
 
   });
