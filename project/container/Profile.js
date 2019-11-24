@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, Button, TextInput, AsyncStorage,} from 'react-native';
+import { StyleSheet, Text, View, Button, TextInput, AsyncStorage,Image} from 'react-native';
 import {NavigationActions, StackActions} from 'react-navigation';
 import { throws } from 'assert';
 
@@ -18,48 +18,48 @@ export default class Profile extends React.Component {
         }
       }
 
-      componentWillMount(){
-        this.getLogin();
-      }
+      // componentWillMount(){
+      //   this.getLogin();
+      // }
 
-      setLogin(){
-        alert("ini setlogin")
-      }
+      // setLogin(){
+      //   alert("ini setlogin")
+      // }
       
-      getLogin = async() =>{
-        var request = require("request");
-        let username = await AsyncStorage.getItem('yglogin')
-        var page = this;
+      // getLogin = async() =>{
+      //   var request = require("request");
+      //   let username = await AsyncStorage.getItem('yglogin')
+      //   var page = this;
 
-        var options = { method: 'GET',
-          url: 'http://lapakkamera.local:8080/handler.php',
-          qs: 
-          { method: 'executeQuery',
-            query: "SELECT * FROM USER WHERE username='" + username + "'" },
-          headers: 
-          { 'cache-control': 'no-cache',
-            Connection: 'keep-alive',
-            Cookie: 'PHPSESSID=sgpjd344vsei3hrvgf9oh7vbgc',
-            'Accept-Encoding': 'gzip, deflate',
-            Host: 'lapakkamera.local:8080',
-            'Postman-Token': '5b255f5a-608b-462e-92b4-907ce09d58ca,59e8ae18-3d58-42a2-8064-a3270f849db8',
-            'Cache-Control': 'no-cache',
-            Accept: '*/*',
-            'User-Agent': 'PostmanRuntime/7.19.0',
-            username: username } };
+      //   var options = { method: 'GET',
+      //     url: 'http://lapakkamera.local:8080/handler.php',
+      //     qs: 
+      //     { method: 'executeQuery',
+      //       query: "SELECT * FROM USER WHERE username='" + username + "'" },
+      //     headers: 
+      //     { 'cache-control': 'no-cache',
+      //       Connection: 'keep-alive',
+      //       Cookie: 'PHPSESSID=sgpjd344vsei3hrvgf9oh7vbgc',
+      //       'Accept-Encoding': 'gzip, deflate',
+      //       Host: 'lapakkamera.local:8080',
+      //       'Postman-Token': '5b255f5a-608b-462e-92b4-907ce09d58ca,59e8ae18-3d58-42a2-8064-a3270f849db8',
+      //       'Cache-Control': 'no-cache',
+      //       Accept: '*/*',
+      //       'User-Agent': 'PostmanRuntime/7.19.0',
+      //       username: username } };
 
-        request(options, function (error, response, body) {
-          if (error) throw new Error(error);
+      //   request(options, function (error, response, body) {
+      //     if (error) throw new Error(error);
 
-          let arr = JSON.parse(body)
-          console.log(arr);
-          page.setState({
-            profile : arr,
-          }, page.setLogin()
-          ) 
-        });
+      //     let arr = JSON.parse(body)
+      //     console.log(arr);
+      //     page.setState({
+      //       profile : arr,
+      //     }, page.setLogin()
+      //     ) 
+      //   });
         
-      }
+      // }
 
       change(text){
         this.setState({
@@ -95,7 +95,14 @@ export default class Profile extends React.Component {
         return (
           
           <View style={styles.container}>
-            <Text style={{fontWeight : "bold", color:"blue", fontSize : 20}}>Edit Profile Page</Text>
+          <View style={styles.upperPart}>
+            <View style={styles.logo}>
+            <Image style= {{margin:5, width : 175, height : 50}}
+                    source={require('../assets/logo-plazakamera-recolor.png')
+                    }></Image>
+            </View>
+          </View>
+            <Text style={{fontWeight : "bold", color:"black", fontSize : 20}}>Edit Profile</Text>
             <Text>Name : </Text>
             <TextInput style={styles.input}
               placeholder="Full Name"
@@ -120,6 +127,13 @@ export default class Profile extends React.Component {
               onChangeText={(t) =>  this.changec(t)}
               value={this.state.cpass}
             />
+
+            <View style={styles.stylebutton}>
+            <Button style={styles.save}
+              title="Save"
+            />
+
+            </View>
           </View>
         );
     }
@@ -139,5 +153,38 @@ const styles = StyleSheet.create({
     height:40,
     width:200,
     borderWidth : 2,
+  },
+
+  stylebutton:
+  {
+    flex:1,
+    width:200,
+    flexDirection:'column'
+
+    
+
+  },
+
+  save:
+  {
+    alignItems:'center',
+    justifyContent:'center'
+  },
+
+  upperPart:
+      {
+        //flex : 0.5,
+        padding : 15,
+        width : '100%',
+        alignItems : 'center',
+        //justifyContent : 'center',
+        backgroundColor : 'white',
+        flexDirection : 'row'
+      },
+  logo:{
+    flex : 1,
+    backgroundColor: 'white',
+    alignItems : 'center',
+    justifyContent : 'center'
   },
 });
