@@ -12,66 +12,69 @@ export default class Login extends React.Component {
         }
       }
 
-      toTab(){
-        this.props.navigation.navigate('TabNavigator');
+      toTab = async() =>{
+        let user = this.state.username;
+        await AsyncStorage.setItem('yglogin', user);
       }
 
       Login = async() =>{
-        this.props.navigation.navigate('TabNavigator');
-        // if (this.state.username == "admin" && this.state.password == "admin") {
+        //this.props.navigation.navigate('TabNavigator');
+        if (this.state.username == "admin" && this.state.password == "admin") {
           
-        // }
-        // else{
-        //   let user = this.state.username;
-        //   let pass = this.state.password;
-        //   let arr = [];
-        //   let request = require("request");
-        //   let ada = false;
-        //   let benar = false;
-        //   const navigator = this.props.navigation;
+        }
+        else{
+          let user = this.state.username;
+          let pass = this.state.password;
+          let arr = [];
+          let request = require("request");
+          let ada = false;
+          let benar = false;
+          const navigator = this.props.navigation;
+          let page = this
 
-        //   var options = { method: 'GET',
-        //     url: 'http://lapakkamera.local:8080/handler.php',
-        //     qs: { method: 'executeQuery', query: 'select * from user' },
-        //     headers: 
-        //     { 'cache-control': 'no-cache',
-        //       Connection: 'keep-alive',
-        //       Cookie: 'PHPSESSID=41edqtis301hndf2rvm5hicr5r',
-        //       'Accept-Encoding': 'gzip, deflate',
-        //       Host: 'lapakkamera.local:8080',
-        //       'Postman-Token': 'ad5f38f5-182e-4c22-b989-af7d918743f2,2e5ad3d2-f07e-49fb-9e94-278a2df8d0da',
-        //       'Cache-Control': 'no-cache',
-        //       Accept: '*/*',
-        //       'User-Agent': 'PostmanRuntime/7.19.0' } };
+          var options = { method: 'GET',
+            url: 'http://lapakkamera.local:8080/handler.php',
+            qs: { method: 'executeQuery', query: 'select * from user' },
+            headers: 
+            { 'cache-control': 'no-cache',
+              Connection: 'keep-alive',
+              Cookie: 'PHPSESSID=41edqtis301hndf2rvm5hicr5r',
+              'Accept-Encoding': 'gzip, deflate',
+              Host: 'lapakkamera.local:8080',
+              'Postman-Token': 'ad5f38f5-182e-4c22-b989-af7d918743f2,2e5ad3d2-f07e-49fb-9e94-278a2df8d0da',
+              'Cache-Control': 'no-cache',
+              Accept: '*/*',
+              'User-Agent': 'PostmanRuntime/7.19.0' } };
 
-        //   request(options, function (error, response, body) {
-        //     if (error) throw new Error(error);
+          request(options, function (error, response, body) {
+            if (error) throw new Error(error);
 
-        //     console.log(JSON.parse(body));
+            console.log(JSON.parse(body));
 
-        //     arr = JSON.parse(body);
-        //     for (let i = 0; i < arr.length; i++) {
-        //       if (arr[i].username == user) {
-        //         ada = true
-        //         if (arr[i].password == pass) {
-        //           benar = true
-        //         }
-        //       }
-        //     }
-        //     if (ada == false) {
-        //       alert("Username belum terdaftar")
-        //     }
-        //     else if (benar == false) {
-        //       alert("password salah")
-        //     }
-        //     else{
-        //       alert("berhasil Login")
-        //       //response(NavigationActions.navigate({ routeName: 'TabNavigator' }));
-        //       navigator.navigate('TabNavigator');
-        //     }
-        //   }
-        //   );
-        // }
+            arr = JSON.parse(body);
+            for (let i = 0; i < arr.length; i++) {
+              if (arr[i].username == user) {
+                ada = true
+                if (arr[i].password == pass) {
+                  benar = true
+                }
+              }
+            }
+            if (ada == false) {
+              alert("Username belum terdaftar")
+            }
+            else if (benar == false) {
+              alert("password salah")
+            }
+            else{
+              alert("berhasil Login")
+              page.toTab();
+              //response(NavigationActions.navigate({ routeName: 'TabNavigator' }));
+              navigator.navigate('TabNavigator');
+            }
+          }
+          );
+        }
       }
 
     //   componentDidMount(){
