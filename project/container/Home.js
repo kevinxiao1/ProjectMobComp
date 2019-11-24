@@ -116,16 +116,20 @@ export default class Home extends React.Component {
                 <View style={styles.cart}>
                     <Ionicons name ="md-cart" size={50} color ="grey"/>
                 </View>
-                
-            
-                
             </View>
+
             <View style={styles.search}>
-                <SearchBar style={{width:150}}
-                  placeholder="Search"
-                  onChangeText={this.updateSearch}
-                  value={search}
-                />
+                <View style={styles.searchstyle}>
+                    <SearchBar
+                    // leftIconContainerStyle={{backgroundColor:'white'}}
+                    
+                    //   inputStyle={{backgroundColor: 'white'}}
+                    //   containerStyle={{backgroundColor: 'white', borderWidth: 1, borderRadius: 5}}
+                    //   placeholderTextColor={'#g5g5g5'}
+                      placeholder={'Search'} onChangeText={this.updateSearch}
+                      value={search}
+                    />
+                </View>
                 <View style={styles.stylebutton}>
                     <Button title="Search"></Button>
                 
@@ -133,7 +137,7 @@ export default class Home extends React.Component {
                 
             </View>
           
-            <Text style={{fontWeight : "bold", color:"blue", fontSize : 20}}>Product Page</Text>
+            <Text style={{fontWeight : "bold", color:"black", fontSize : 20}}>Product</Text>
             <FlatList
               data={this.state.listProduct}
                 renderItem={(obj) => this.renderProduct(obj)}
@@ -189,7 +193,9 @@ const styles = StyleSheet.create({
         
       },
       stylebutton:{
-          //height:150
+        flex: 1,
+        alignItems : 'flex-end',
+        justifyContent : 'flex-end'
       },
 
       logo:{
@@ -215,7 +221,18 @@ const styles = StyleSheet.create({
         alignItems : 'flex-start',
         justifyContent : 'flex-start'
        },
+
+       searchstyle:{
+        flex: 1,
+        // alignItems : 'center',
+        // justifyContent : 'center'
+         alignItems : 'flex-start',
+         justifyContent : 'flex-start'
+       },
+
+
        search:{
+       // flex:1,
         padding : 15,
         width : '100%',
         alignItems : 'center',
