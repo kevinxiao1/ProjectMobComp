@@ -12,7 +12,7 @@ export default class Home extends React.Component {
           password: '',
           status : '',
           search: '',
-          products : [],
+          //products : [],
         }
       }
 
@@ -131,42 +131,42 @@ export default class Home extends React.Component {
     // }
 
 
-      getProduct(){
-        var request = require("request");
-        var page = this
-        let arr = []
+    //   getProduct(){
+    //     var request = require("request");
+    //     var page = this
+    //     let arr = []
 
-        var options = { method: 'GET',
-          url: 'http://lapakkamera.local:8080/handler.php',
-          qs: 
-          { method: 'executeQuery',
-            query: 'SELECT ProductID, ProductName, CategoryID, Price, imgSource FROM PRODUCT' },
-          headers: 
-          { 'cache-control': 'no-cache',
-            Connection: 'keep-alive',
-            Cookie: 'PHPSESSID=sgpjd344vsei3hrvgf9oh7vbgc',
-            'Accept-Encoding': 'gzip, deflate',
-            Host: 'lapakkamera.local:8080',
-            'Postman-Token': '1ba496c8-d9e1-4be3-b471-e597238d7bca,3a15360f-20e2-4bd2-a4ed-8fda416a3e6f',
-            'Cache-Control': 'no-cache',
-            Accept: '*/*',
-            'User-Agent': 'PostmanRuntime/7.19.0' } };
+    //     var options = { method: 'GET',
+    //       url: 'http://lapakkamera.local:8080/handler.php',
+    //       qs: 
+    //       { method: 'executeQuery',
+    //         query: 'SELECT ProductID, ProductName, CategoryID, Price, imgSource FROM PRODUCT' },
+    //       headers: 
+    //       { 'cache-control': 'no-cache',
+    //         Connection: 'keep-alive',
+    //         Cookie: 'PHPSESSID=sgpjd344vsei3hrvgf9oh7vbgc',
+    //         'Accept-Encoding': 'gzip, deflate',
+    //         Host: 'lapakkamera.local:8080',
+    //         'Postman-Token': '1ba496c8-d9e1-4be3-b471-e597238d7bca,3a15360f-20e2-4bd2-a4ed-8fda416a3e6f',
+    //         'Cache-Control': 'no-cache',
+    //         Accept: '*/*',
+    //         'User-Agent': 'PostmanRuntime/7.19.0' } };
 
-        request(options, function (error, response, body) {
-          if (error) throw new Error(error);
+    //     request(options, function (error, response, body) {
+    //       if (error) throw new Error(error);
 
-          arr = JSON.parse(body);
-          page.setState({
-            products : arr
-          })
-          console.log(page.state.products)
-        });
+    //       arr = JSON.parse(body);
+    //       page.setState({
+    //         products : arr
+    //       })
+    //       console.log(page.state.products)
+    //     });
 
-      }
+    //   }
 
-      componentWillMount(){
-        this.getProduct();
-      }
+    //   componentWillMount(){
+    //     this.getProduct();
+    //   }
 
       Logout(){
           this.props.navigation.navigate('Login')
@@ -191,16 +191,20 @@ export default class Home extends React.Component {
                 <View style={styles.cart}>
                     <Ionicons name ="md-cart" size={50} color ="grey"/>
                 </View>
-                
-            
-                
             </View>
+
             <View style={styles.search}>
-                <SearchBar style={{width:150}}
-                  placeholder="Search"
-                  onChangeText={this.updateSearch}
-                  value={search}
-                />
+                <View style={styles.searchstyle}>
+                    <SearchBar
+                    // leftIconContainerStyle={{backgroundColor:'white'}}
+                    
+                    //   inputStyle={{backgroundColor: 'white'}}
+                    //   containerStyle={{backgroundColor: 'white', borderWidth: 1, borderRadius: 5}}
+                    //   placeholderTextColor={'#g5g5g5'}
+                      placeholder={'Search'} onChangeText={this.updateSearch}
+                      value={search}
+                    />
+                </View>
                 <View style={styles.stylebutton}>
                     <Button title="Search" onPress={() => {this.cari()}}></Button>
                 </View>
@@ -210,7 +214,7 @@ export default class Home extends React.Component {
                 
             </View>
           
-            <Text style={{fontWeight : "bold", color:"blue", fontSize : 20}}>Product Page</Text>
+            <Text style={{fontWeight : "bold", color:"black", fontSize : 20}}>Product</Text>
             <FlatList
               data={this.state.products}
                 renderItem={(obj) => this.renderProduct(obj)}
@@ -266,7 +270,9 @@ const styles = StyleSheet.create({
         
       },
       stylebutton:{
-          //height:150
+        flex: 1,
+        alignItems : 'flex-end',
+        justifyContent : 'flex-end'
       },
 
       logo:{
@@ -292,7 +298,18 @@ const styles = StyleSheet.create({
         alignItems : 'flex-start',
         justifyContent : 'flex-start'
        },
+
+       searchstyle:{
+        flex: 1,
+        // alignItems : 'center',
+        // justifyContent : 'center'
+         alignItems : 'flex-start',
+         justifyContent : 'flex-start'
+       },
+
+
        search:{
+       // flex:1,
         padding : 15,
         width : '100%',
         alignItems : 'center',

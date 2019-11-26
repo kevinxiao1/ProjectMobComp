@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, Button, TextInput, AsyncStorage,} from 'react-native';
+import { StyleSheet, Text, View, Button, TextInput, AsyncStorage,Image} from 'react-native';
 import {NavigationActions, StackActions} from 'react-navigation';
 import { throws } from 'assert';
 
@@ -18,9 +18,9 @@ export default class Profile extends React.Component {
         }
       }
 
-      componentWillMount(){
-        this.getLogin();
-      }
+      // componentWillMount(){
+      //   this.getLogin();
+      // }
 
       componentWillMount(){
         this.getLogin();
@@ -103,8 +103,8 @@ export default class Profile extends React.Component {
           // }, console.log(page.profile))
 
         });
-        
       }
+      // }
 
       change(text){
         this.setState({
@@ -140,7 +140,14 @@ export default class Profile extends React.Component {
         return (
           
           <View style={styles.container}>
-            <Text style={{fontWeight : "bold", color:"blue", fontSize : 20}}>Edit Profile Page</Text>
+          <View style={styles.upperPart}>
+            <View style={styles.logo}>
+            <Image style= {{margin:5, width : 175, height : 50}}
+                    source={require('../assets/logo-plazakamera-recolor.png')
+                    }></Image>
+            </View>
+          </View>
+            <Text style={{fontWeight : "bold", color:"black", fontSize : 20}}>Edit Profile</Text>
             <Text>Name : </Text>
             <TextInput style={styles.input}
               placeholder="Full Name"
@@ -165,11 +172,12 @@ export default class Profile extends React.Component {
               onChangeText={(t) =>  this.changec(t)}
               value={this.state.cpass}
             />
+
             <View style={styles.stylebutton}>
-            <Button style={styles.input}
-              title="Edit"
-              onPress={() => this.Edit()}
+            <Button style={styles.save}
+              title="Save" onPress={() => this.Edit()}
             />
+
             </View>
           </View>
         );
@@ -190,5 +198,38 @@ const styles = StyleSheet.create({
     height:40,
     width:200,
     borderWidth : 2,
+  },
+
+  stylebutton:
+  {
+    flex:1,
+    width:200,
+    flexDirection:'column'
+
+    
+
+  },
+
+  save:
+  {
+    alignItems:'center',
+    justifyContent:'center'
+  },
+
+  upperPart:
+      {
+        //flex : 0.5,
+        padding : 15,
+        width : '100%',
+        alignItems : 'center',
+        //justifyContent : 'center',
+        backgroundColor : 'white',
+        flexDirection : 'row'
+      },
+  logo:{
+    flex : 1,
+    backgroundColor: 'white',
+    alignItems : 'center',
+    justifyContent : 'center'
   },
 });
