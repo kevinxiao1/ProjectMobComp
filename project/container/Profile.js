@@ -22,8 +22,52 @@ export default class Profile extends React.Component {
         this.getLogin();
       }
 
-      setLogin(){
-        alert("ini setlogin")
+      componentWillMount(){
+        this.getLogin();
+      }
+
+      setLogin(arr){
+        let array = []
+        array = arr
+        
+        console.log(array)
+        this.setState({
+          nama : array[0].name,
+          alamat : array[0].address,
+          password : array[0].password,
+          cpass : array[0].password
+        })
+      }
+
+      Edit = async() =>{
+        var request = require("request");
+        var page = this;
+
+        let username = await AsyncStorage.getItem('yglogin')
+        let password = this.state.password;
+        let alamat = this.state.alamat;
+        let name = this.state.nama;
+
+        var options = { method: 'POST',
+          url: 'http://lapakkamera.local:8080/handler.php',
+          qs: 
+          { method: 'executeNonQuery',
+            query: "update User set name='"+ name + "',address='"+ alamat + "',password='"+ password + "' where username='" + username + "'" },
+          headers: 
+          { 'Postman-Token': '3787b32b-1f35-445c-8765-7ea5c377fa94',
+            'cache-control': 'no-cache',
+            password: '',
+            address: '',
+            name: '' } };
+
+        request(options, function (error, response, body) {
+          if (error) throw new Error(error);
+
+          console.log(body);
+          alert('berhasil update')
+          page.getLogin()
+        });
+
       }
       
       getLogin = async() =>{
@@ -53,10 +97,11 @@ export default class Profile extends React.Component {
 
           let arr = JSON.parse(body)
           console.log(arr);
-          page.setState({
-            profile : arr,
-          }, page.setLogin()
-          ) 
+          page.setLogin(arr)
+          // page.setState({
+          //   profile : arr
+          // }, console.log(page.profile))
+
         });
         
       }
@@ -120,6 +165,12 @@ export default class Profile extends React.Component {
               onChangeText={(t) =>  this.changec(t)}
               value={this.state.cpass}
             />
+            <View style={styles.stylebutton}>
+            <Button style={styles.input}
+              title="Edit"
+              onPress={() => this.Edit()}
+            />
+            </View>
           </View>
         );
     }

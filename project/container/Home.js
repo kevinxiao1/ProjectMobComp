@@ -20,6 +20,42 @@ export default class Home extends React.Component {
         this.setState({ search });
       };
 
+      cari(){
+        var request = require("request");
+        var page = this
+        let arr = []
+        let name = this.state.search
+
+        var options = { method: 'GET',
+          url: 'http://lapakkamera.local:8080/handler.php',
+          qs: 
+          { method: 'executeQuery',
+            query: "SELECT ProductID, ProductName, CategoryID, Price, imgSource FROM PRODUCT where ProductName LIKE '%" + name + "%'" },
+          headers: 
+          { 'cache-control': 'no-cache',
+            Connection: 'keep-alive',
+            Cookie: 'PHPSESSID=sgpjd344vsei3hrvgf9oh7vbgc',
+            'Accept-Encoding': 'gzip, deflate',
+            Host: 'lapakkamera.local:8080',
+            'Postman-Token': '1ba496c8-d9e1-4be3-b471-e597238d7bca,3a15360f-20e2-4bd2-a4ed-8fda416a3e6f',
+            'Cache-Control': 'no-cache',
+            Accept: '*/*',
+            'User-Agent': 'PostmanRuntime/7.19.0' } };
+
+        request(options, function (error, response, body) {
+          if (error) throw new Error(error);
+
+          arr = JSON.parse(body);
+          page.setState({
+            products : arr
+          })
+          console.log(page.state.products)
+        });
+      }
+
+      toDetail(id){
+        alert(id + "barang")
+      }
       state={
         listProduct: [
             {
@@ -59,7 +95,7 @@ export default class Home extends React.Component {
 
       renderProduct = ({item}) =>(
         <TouchableOpacity style={styles.productContainer}
-        onPress={()=> alert(item.ProductID)}>
+        onPress={() =>this.toDetail(item.ProductID)}>
             <View style={{flex: 3, justifyContent:'center'}}>
                 <Image
                     style={{width: 100, height: 100}}
@@ -166,8 +202,10 @@ export default class Home extends React.Component {
                   value={search}
                 />
                 <View style={styles.stylebutton}>
-                    <Button title="Search" onPress={() => {alert("Search")}}></Button>
-                
+                    <Button title="Search" onPress={() => {this.cari()}}></Button>
+                </View>
+                <View style={styles.stylebutton}>
+                    <Button title="Reset" onPress={() => {this.getProduct()}}></Button>
                 </View>
                 
             </View>
