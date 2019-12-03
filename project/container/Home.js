@@ -1,6 +1,7 @@
 import React from 'react';
 import { Ionicons } from '@expo/vector-icons';
 import { StyleSheet, Text, View, Button, TextInput, AsyncStorage, FlatList, TouchableOpacity, Dimensions, Image} from 'react-native';
+import NumberFormat from 'react-number-format';
 import {NavigationActions, StackActions} from 'react-navigation';
 import { SearchBar } from 'react-native-elements';
 
@@ -53,8 +54,10 @@ export default class Home extends React.Component {
         });
       }
 
-      toDetail(id){
+      toDetail = async(id) =>{
         alert(id + "barang")
+        await AsyncStorage.setItem("tampilDetail", id);
+        this.props.navigation.navigate("Detail")
       }
       state={
         listProduct: [
@@ -98,75 +101,80 @@ export default class Home extends React.Component {
         onPress={() =>this.toDetail(item.ProductID)}>
             <View style={{flex: 3, justifyContent:'center'}}>
                 <Image
-                    style={{width: 100, height: 100}}
-                    source={require('../assets/D90.jpg')}
+                    style={{width: 140, height: 140}}
+                    source={require('../assets/' + item.imgSource)}
                 ></Image>
             </View>
-            <View style={{flex: 1}}>
+            <View style={{flex: 1, justifyContent:'center'}}>
                 <Text>{item.ProductName}</Text>
+                <Text><NumberFormat value={item.Price} displayType={'text'} thousandSeparator={true} prefix={'Rp.'} /></Text> 
             </View>
         </TouchableOpacity>
       )
 
-    //   mapProduct(){
-    //     const data = this.state.products;
+      mapProduct(){
+        const data = this.state.products;
+        let listsrc = [];
+        for (let i = 0; i < data.length; i++) {
+          listsrc.push(data[i].imgSource)
+        }
+        let list = data.map((item,idx) => {
+            return(
+              <TouchableOpacity style={styles.productContainer}
+              onPress={()=> alert(item.ProductID)}>
+                  <View style={{flex: 3, justifyContent:'center'}}>
+                      <Image
+                          style={{width: 200, height: 200}}
+                          source={require('../assets/' + item.imgSource)}
+                      ></Image>
+                  </View>
+                  <View style={{flex: 1, justifyContent:'center'}}>
+                      <Text>{item.ProductName}</Text>
+                      <Text><NumberFormat value={item.Price} displayType={'text'} thousandSeparator={true} prefix={'Rp.'} /></Text> 
+                  </View>
+              </TouchableOpacity>
+            )
   
-    //     let list = data.map((item) => {
-    //         return(
-    //           <TouchableOpacity style={styles.productContainer}
-    //           onPress={()=> alert(item.ProductID)}>
-    //               <View style={{flex: 3, justifyContent:'center'}}>
-    //                   <Image
-    //                       style={{width: 100, height: 100}}
-    //                       source={require('../assets/D90.jpg')}
-    //                   ></Image>
-    //               </View>
-    //               <View style={{flex: 1}}>
-    //                   <Text>{item.ProductName}</Text>
-    //               </View>
-    //           </TouchableOpacity>
-    //         )
-  
-    //     })
-    // }
+        })
+    }
 
 
-    //   getProduct(){
-    //     var request = require("request");
-    //     var page = this
-    //     let arr = []
+      getProduct(){
+        var request = require("request");
+        var page = this
+        let arr = []
 
-    //     var options = { method: 'GET',
-    //       url: 'http://lapakkamera.local:8080/handler.php',
-    //       qs: 
-    //       { method: 'executeQuery',
-    //         query: 'SELECT ProductID, ProductName, CategoryID, Price, imgSource FROM PRODUCT' },
-    //       headers: 
-    //       { 'cache-control': 'no-cache',
-    //         Connection: 'keep-alive',
-    //         Cookie: 'PHPSESSID=sgpjd344vsei3hrvgf9oh7vbgc',
-    //         'Accept-Encoding': 'gzip, deflate',
-    //         Host: 'lapakkamera.local:8080',
-    //         'Postman-Token': '1ba496c8-d9e1-4be3-b471-e597238d7bca,3a15360f-20e2-4bd2-a4ed-8fda416a3e6f',
-    //         'Cache-Control': 'no-cache',
-    //         Accept: '*/*',
-    //         'User-Agent': 'PostmanRuntime/7.19.0' } };
+        var options = { method: 'GET',
+          url: 'http://lapakkamera.local:8080/handler.php',
+          qs: 
+          { method: 'executeQuery',
+            query: 'SELECT ProductID, ProductName, CategoryID, Price, imgSource FROM PRODUCT' },
+          headers: 
+          { 'cache-control': 'no-cache',
+            Connection: 'keep-alive',
+            Cookie: 'PHPSESSID=sgpjd344vsei3hrvgf9oh7vbgc',
+            'Accept-Encoding': 'gzip, deflate',
+            Host: 'lapakkamera.local:8080',
+            'Postman-Token': '1ba496c8-d9e1-4be3-b471-e597238d7bca,3a15360f-20e2-4bd2-a4ed-8fda416a3e6f',
+            'Cache-Control': 'no-cache',
+            Accept: '*/*',
+            'User-Agent': 'PostmanRuntime/7.19.0' } };
 
-    //     request(options, function (error, response, body) {
-    //       if (error) throw new Error(error);
+        request(options, function (error, response, body) {
+          if (error) throw new Error(error);
 
-    //       arr = JSON.parse(body);
-    //       page.setState({
-    //         products : arr
-    //       })
-    //       console.log(page.state.products)
-    //     });
+          arr = JSON.parse(body);
+          page.setState({
+            products : arr
+          })
+          console.log(page.state.products)
+        });
 
-    //   }
+      }
 
-    //   componentWillMount(){
-    //     this.getProduct();
-    //   }
+      componentWillMount(){
+        this.getProduct();
+      }
 
       Logout(){
           this.props.navigation.navigate('Login')
@@ -219,7 +227,7 @@ export default class Home extends React.Component {
               data={this.state.products}
                 renderItem={(obj) => this.renderProduct(obj)}
                 keyExtractor={(item)=> item.ProductID + item.ProductName}
-                 numColumns={3}
+                 numColumns={2}
             ></FlatList>
             <Button
               title="Logout"
@@ -284,11 +292,11 @@ const styles = StyleSheet.create({
 
       upperPart:
       {
-        //flex : 0.5,
+        flex : 0.5,
         padding : 15,
         width : '100%',
         alignItems : 'center',
-        //justifyContent : 'center',
+        justifyContent : 'center',
         backgroundColor : 'white',
         flexDirection : 'row'
       },

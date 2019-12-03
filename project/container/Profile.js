@@ -1,5 +1,6 @@
 import React from 'react';
 import { StyleSheet, Text, View, Button, TextInput, AsyncStorage,Image} from 'react-native';
+import NumberFormat from 'react-number-format';
 import {NavigationActions, StackActions} from 'react-navigation';
 import { throws } from 'assert';
 
