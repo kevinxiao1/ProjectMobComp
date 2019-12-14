@@ -7,6 +7,7 @@ import Login from '../container/Login';
 import Register from '../container/Register';
 import Admin from '../container/Register';
 import Detail from '../container/Detail';
+import Cart from '../container/Cart';
 
 import { TouchableOpacity, Text, Image} from "react-native";
 import TabNavigator from '../navigator/tabNavigator';
@@ -27,6 +28,9 @@ const MainNavigator = createStackNavigator({
     },
     Detail : {
         screen : Detail
+    },
+    Cart : {
+        screen : Cart
     }
     },
     //konfigurasi
