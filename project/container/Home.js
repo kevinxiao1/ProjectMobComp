@@ -251,7 +251,9 @@ export default class Home extends React.Component {
                     }></Image>
                 </View>
                 <View style={styles.cart}>
+                  <TouchableOpacity>
                     <Ionicons name ="md-cart" size={50} color ="grey"/>
+                    </TouchableOpacity>
                 </View>
             </View>
 
