@@ -40,10 +40,10 @@ export default class Login extends React.Component {
             headers: 
             { 'cache-control': 'no-cache',
               Connection: 'keep-alive',
-              Cookie: 'PHPSESSID=41edqtis301hndf2rvm5hicr5r',
+              // Cookie: 'PHPSESSID=41edqtis301hndf2rvm5hicr5r',
               'Accept-Encoding': 'gzip, deflate',
               Host: 'lapakkamera.local:8080',
-              'Postman-Token': 'ad5f38f5-182e-4c22-b989-af7d918743f2,2e5ad3d2-f07e-49fb-9e94-278a2df8d0da',
+              // 'Postman-Token': 'ad5f38f5-182e-4c22-b989-af7d918743f2,2e5ad3d2-f07e-49fb-9e94-278a2df8d0da',
               'Cache-Control': 'no-cache',
               Accept: '*/*',
               'User-Agent': 'PostmanRuntime/7.19.0' } };
@@ -177,8 +177,5 @@ const styles = StyleSheet.create({
   stylebutton:
   {
     width:200
-
-    
-
   },
 });

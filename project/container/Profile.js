@@ -55,7 +55,7 @@ export default class Profile extends React.Component {
           { method: 'executeNonQuery',
             query: "update User set name='"+ name + "',address='"+ alamat + "',password='"+ password + "' where username='" + username + "'" },
           headers: 
-          { 'Postman-Token': '3787b32b-1f35-445c-8765-7ea5c377fa94',
+          { //'Postman-Token': '3787b32b-1f35-445c-8765-7ea5c377fa94',
             'cache-control': 'no-cache',
             password: '',
             address: '',
@@ -84,10 +84,10 @@ export default class Profile extends React.Component {
           headers: 
           { 'cache-control': 'no-cache',
             Connection: 'keep-alive',
-            Cookie: 'PHPSESSID=sgpjd344vsei3hrvgf9oh7vbgc',
+            //Cookie: 'PHPSESSID=sgpjd344vsei3hrvgf9oh7vbgc',
             'Accept-Encoding': 'gzip, deflate',
             Host: 'lapakkamera.local:8080',
-            'Postman-Token': '5b255f5a-608b-462e-92b4-907ce09d58ca,59e8ae18-3d58-42a2-8064-a3270f849db8',
+            //'Postman-Token': '5b255f5a-608b-462e-92b4-907ce09d58ca,59e8ae18-3d58-42a2-8064-a3270f849db8',
             'Cache-Control': 'no-cache',
             Accept: '*/*',
             'User-Agent': 'PostmanRuntime/7.19.0',

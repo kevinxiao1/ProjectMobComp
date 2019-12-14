@@ -51,10 +51,10 @@ export default class Home extends React.Component {
           headers: 
           { 'cache-control': 'no-cache',
             Connection: 'keep-alive',
-            Cookie: 'PHPSESSID=sgpjd344vsei3hrvgf9oh7vbgc',
+            //Cookie: 'PHPSESSID=sgpjd344vsei3hrvgf9oh7vbgc',
             'Accept-Encoding': 'gzip, deflate',
             Host: 'lapakkamera.local:8080',
-            'Postman-Token': '1ba496c8-d9e1-4be3-b471-e597238d7bca,3a15360f-20e2-4bd2-a4ed-8fda416a3e6f',
+            //'Postman-Token': '1ba496c8-d9e1-4be3-b471-e597238d7bca,3a15360f-20e2-4bd2-a4ed-8fda416a3e6f',
             'Cache-Control': 'no-cache',
             Accept: '*/*',
             'User-Agent': 'PostmanRuntime/7.19.0' } };
@@ -89,10 +89,10 @@ export default class Home extends React.Component {
           headers: 
           { 'cache-control': 'no-cache',
             Connection: 'keep-alive',
-            Cookie: 'PHPSESSID=sgpjd344vsei3hrvgf9oh7vbgc',
+            //Cookie: 'PHPSESSID=sgpjd344vsei3hrvgf9oh7vbgc',
             'Accept-Encoding': 'gzip, deflate',
             Host: 'lapakkamera.local:8080',
-            'Postman-Token': '1ba496c8-d9e1-4be3-b471-e597238d7bca,3a15360f-20e2-4bd2-a4ed-8fda416a3e6f',
+            //'Postman-Token': '1ba496c8-d9e1-4be3-b471-e597238d7bca,3a15360f-20e2-4bd2-a4ed-8fda416a3e6f',
             'Cache-Control': 'no-cache',
             Accept: '*/*',
             'User-Agent': 'PostmanRuntime/7.19.0' } };
@@ -206,10 +206,10 @@ export default class Home extends React.Component {
           headers: 
           { 'cache-control': 'no-cache',
             Connection: 'keep-alive',
-            Cookie: 'PHPSESSID=sgpjd344vsei3hrvgf9oh7vbgc',
+            //Cookie: 'PHPSESSID=sgpjd344vsei3hrvgf9oh7vbgc',
             'Accept-Encoding': 'gzip, deflate',
             Host: 'lapakkamera.local:8080',
-            'Postman-Token': '1ba496c8-d9e1-4be3-b471-e597238d7bca,3a15360f-20e2-4bd2-a4ed-8fda416a3e6f',
+            //'Postman-Token': '1ba496c8-d9e1-4be3-b471-e597238d7bca,3a15360f-20e2-4bd2-a4ed-8fda416a3e6f',
             'Cache-Control': 'no-cache',
             Accept: '*/*',
             'User-Agent': 'PostmanRuntime/7.19.0' } };
@@ -234,6 +234,10 @@ export default class Home extends React.Component {
           this.props.navigation.navigate('Login')
       }
 
+      toCart(){
+        this.props.navigation.navigate('Cart')
+      }
+
       render() {
         const { search } = this.state;
         return (
@@ -251,7 +255,7 @@ export default class Home extends React.Component {
                     }></Image>
                 </View>
                 <View style={styles.cart}>
-                  <TouchableOpacity>
+                  <TouchableOpacity onPress={() =>this.toCart()}>
                     <Ionicons name ="md-cart" size={50} color ="grey"/>
                     </TouchableOpacity>
                 </View>
