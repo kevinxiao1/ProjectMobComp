@@ -2,6 +2,7 @@ import React from 'react';
 import { StyleSheet, Text, View, Button, TextInput, AsyncStorage, FlatList, TouchableOpacity, Image, Dimensions} from 'react-native';
 import NumberFormat from 'react-number-format';
 import {NavigationActions, StackActions} from 'react-navigation';
+import NumericInput from 'react-numeric-input';
 
 export default class Login extends React.Component {
     constructor(props){
@@ -66,17 +67,39 @@ export default class Login extends React.Component {
         //     </View>
         // </TouchableOpacity>
         <View>
-          <View style={{flex: 3, justifyContent:'center', alignItems:"center", marginTop: 60}}>
+          <View style={{flex: 4, justifyContent:'center', alignItems:"center", marginTop: 60}}>
                 <Image
                     style={{width: 250, height: 250, resizeMode:'fit', borderWidth: 3, shadowColor: 'grey', shadowRadius: 1}}
                     source={require('../assets/' + item.imgSource)}
                 ></Image>
             </View>
-            <View style={{flex: 1}}>
+            <View style={{flex: 1, marginTop: 10}}>
                 <Text>Name : {item.ProductName}</Text>
                 <Text>Category : {item.CategoryID}</Text>
                 <Text>Price <NumberFormat value={item.Price} displayType={'text'} thousandSeparator={true} prefix={'Rp.'} /></Text>
             </View>
+            <View style={{flexDirection:"row", alignItems:"center"}}>
+              <View>
+              <NumericInput className="form-control" min={0} onChangeText={(t) =>  this.changej(t)} value={this.state.password}/>
+              </View>
+              <View>
+              <Button
+                title="Add To Cart"
+                onPress={() => this.Add()}
+              />
+              </View>
+            </View>
+            
+            {/* <TextInput style={styles.input}
+              placeholder="Jumlah"
+              onChangeText={(t) =>  this.changej(t)}
+              value={this.state.password}
+            /> */}
+            
+            <Button
+              title="Go Back"
+              onPress={() => this.Back()}
+            />
         </View>
       )
 
@@ -174,7 +197,7 @@ export default class Login extends React.Component {
                 keyExtractor={(item)=> item.ProductID + item.ProductName}
                  numColumns={2}
             ></FlatList>
-            <TextInput style={styles.input}
+            {/* <TextInput style={styles.input}
               placeholder="Jumlah"
               onChangeText={(t) =>  this.changej(t)}
               value={this.state.password}
@@ -186,7 +209,7 @@ export default class Login extends React.Component {
             <Button
               title="Go Back"
               onPress={() => this.Back()}
-            />
+            /> */}
           </View>
         );
     }
