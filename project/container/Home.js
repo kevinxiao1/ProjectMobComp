@@ -101,7 +101,7 @@ export default class Home extends React.Component {
         onPress={() =>this.toDetail(item.ProductID)}>
             <View style={{flex: 3, justifyContent:'center'}}>
                 <Image
-                    style={{width: 140, height: 140}}
+                    style={{width: 100}}
                     source={require('../assets/' + item.imgSource)}
                 ></Image>
             </View>

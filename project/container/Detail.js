@@ -19,19 +19,30 @@ export default class Login extends React.Component {
       }
 
       renderProduct = ({item}) =>(
-        <TouchableOpacity style={styles.productContainer}
-        >
-            <View style={{flex: 3, justifyContent:'center'}}>
+        // <TouchableOpacity style={styles.productContainer}>
+        //     <View style={{flex: 3, justifyContent:'center'}}>
+        //         <Image
+        //             style={{width: 140, height: 140}}
+        //             source={require('../assets/' + item.imgSource)}
+        //         ></Image>
+        //     </View>
+        //     <View style={{flex: 1}}>
+        //         <Text>{item.ProductName}</Text>
+        //         <NumberFormat value={item.Price} displayType={'text'} thousandSeparator={true} prefix={'Rp.'} />
+        //     </View>
+        // </TouchableOpacity>
+        <View>
+          <View style={{flex: 3, justifyContent:'center', alignItems:"center", marginTop: 60}}>
                 <Image
-                    style={{width: 140, height: 140}}
+                    style={{width: 250, height: 250, resizeMode:'fit', borderWidth: 3, shadowColor: 'grey', shadowRadius: 1}}
                     source={require('../assets/' + item.imgSource)}
                 ></Image>
             </View>
-            <View style={{flex: 1}}>
-                <Text>{item.ProductName}</Text>
+            <View style={{flex: 1, justifyContent: "center"}}>
+                <Text style={{fontSize:20}}>{item.ProductName}</Text>
                 <NumberFormat value={item.Price} displayType={'text'} thousandSeparator={true} prefix={'Rp.'} />
             </View>
-        </TouchableOpacity>
+        </View>
       )
 
       mapProduct(){

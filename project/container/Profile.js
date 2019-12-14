@@ -199,6 +199,8 @@ const styles = StyleSheet.create({
     height:40,
     width:200,
     borderWidth : 2,
+    textAlign: "center",
+    marginBottom: 10
   },
 
   stylebutton:
