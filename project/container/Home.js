@@ -1,6 +1,6 @@
 import React from 'react';
 import { Ionicons } from '@expo/vector-icons';
-import { StyleSheet, Text, View, Button, TextInput, AsyncStorage, FlatList, TouchableOpacity, Dimensions, Image} from 'react-native';
+import { StyleSheet, Text, View, Button, TextInput, AsyncStorage, FlatList, TouchableOpacity, Dimensions, Image, Picker} from 'react-native';
 import NumberFormat from 'react-number-format';
 import {NavigationActions, StackActions} from 'react-navigation';
 import { SearchBar } from 'react-native-elements';
@@ -13,9 +13,63 @@ export default class Home extends React.Component {
           password: '',
           status : '',
           search: '',
+          mode : '',
           //products : [],
         }
       }
+
+      mode(m){
+        this.setState({
+          mode: m
+        }, this.categorySearch(m))
+      }
+
+      categorySearch(m){
+        let category = m;
+
+        let searchcategory = ''
+        if (category == 'All') {
+          searchcategory = 'SELECT ProductID, ProductName, CategoryID, Price, imgSource FROM PRODUCT'
+        }
+        else if (category == 'Camera') {
+          searchcategory = 'SELECT ProductID, ProductName, CategoryID, Price, imgSource FROM PRODUCT where CategoryID = 1'
+        }
+        else if (category == 'Lens') {
+          searchcategory = 'SELECT ProductID, ProductName, CategoryID, Price, imgSource FROM PRODUCT where CategoryID = 2'
+        }
+
+        var request = require("request");
+        var page = this
+        let arr = []
+        let name = this.state.search
+
+        var options = { method: 'GET',
+          url: 'http://lapakkamera.local:8080/handler.php',
+          qs: 
+          { method: 'executeQuery',
+            query: searchcategory },
+          headers: 
+          { 'cache-control': 'no-cache',
+            Connection: 'keep-alive',
+            Cookie: 'PHPSESSID=sgpjd344vsei3hrvgf9oh7vbgc',
+            'Accept-Encoding': 'gzip, deflate',
+            Host: 'lapakkamera.local:8080',
+            'Postman-Token': '1ba496c8-d9e1-4be3-b471-e597238d7bca,3a15360f-20e2-4bd2-a4ed-8fda416a3e6f',
+            'Cache-Control': 'no-cache',
+            Accept: '*/*',
+            'User-Agent': 'PostmanRuntime/7.19.0' } };
+
+        request(options, function (error, response, body) {
+          if (error) throw new Error(error);
+
+          arr = JSON.parse(body);
+          page.setState({
+            products : arr
+          })
+          console.log(page.state.products)
+        });
+      }
+
 
       updateSearch = search => {
         this.setState({ search });
@@ -221,6 +275,15 @@ export default class Home extends React.Component {
                 </View>
                 
             </View>
+            <View style={styles.search}>
+            <Text>Select Category : </Text>
+            <Picker selectedValue={this.state.mode} onValueChange={(t)=>this.mode(t)}>
+              <Picker.Item label = "All" value ="All"/>>
+              <Picker.Item label = "Camera" value ="Camera"/>>
+              <Picker.Item label = "Lens" value ="Lens"/>>
+            </Picker>
+                
+            </View>
           
             <Text style={{fontWeight : "bold", color:"black", fontSize : 20}}>Product</Text>
             <FlatList
@@ -256,7 +319,7 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         marginTop: 10,
         alignItems: 'center',
-        justifyContent: 'center',
+        // justifyContent: 'center',
     },
     btnLogin:{
         margin: 10,

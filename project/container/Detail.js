@@ -8,14 +8,45 @@ export default class Login extends React.Component {
         super(props);
         this.state = {
           nama : '',
-
+          category : '',
           products : [],
+          jumlah : '',
 
         }
       }
+      changej(text){
+        this.setState({
+          jumlah : text
+        })
+      }
+      Add = async() =>{
+          let arr = await AsyncStorage.getItem('Cart')
 
-      Add(){
-          alert('add')
+          if (arr != null) {
+            arr =JSON.parse(arr)
+            arr.push({
+              ygbeli : AsyncStorage.getItem('yglogin'),
+              id : this.state.products[0].ProductID,
+              jumlah : this.state.jumlah,
+              harga : this.state.products[0].Price * this.state.jumlah
+            })
+
+            await AsyncStorage.setItem('Cart', JSON.stringify(arr))
+          }
+          else{
+            arr = []
+            arr.push({
+              ygbeli : AsyncStorage.getItem('yglogin'),
+              id : this.state.products[0].ProductID,
+              jumlah : this.state.jumlah,
+              harga : this.state.products[0].Price * this.state.jumlah
+            })
+            await AsyncStorage.setItem('Cart', JSON.stringify(arr))
+          }
+      }
+
+      Back(){
+        this.props.navigation.navigate('Home')
       }
 
       renderProduct = ({item}) =>(
@@ -28,8 +59,9 @@ export default class Login extends React.Component {
                 ></Image>
             </View>
             <View style={{flex: 1}}>
-                <Text>{item.ProductName}</Text>
-                <NumberFormat value={item.Price} displayType={'text'} thousandSeparator={true} prefix={'Rp.'} />
+                <Text>Name : {item.ProductName}</Text>
+                <Text>Category : {this.state.category}</Text>
+                <Text>Price <NumberFormat value={item.Price} displayType={'text'} thousandSeparator={true} prefix={'Rp.'} /></Text>
             </View>
         </TouchableOpacity>
       )
@@ -52,6 +84,7 @@ export default class Login extends React.Component {
                   </View>
                   <View style={{flex: 1}}>
                       <Text>{item.ProductName}</Text>
+                      <Text>{this.state.category}</Text>
                       <Text><NumberFormat value={item.Price} displayType={'text'} thousandSeparator={true} prefix={'Rp.'} /></Text> 
                   </View>
               </TouchableOpacity>
@@ -67,10 +100,20 @@ export default class Login extends React.Component {
       isiDetail(arr){
           let array = []
           array = arr;
+          let temp = ''
 
+          if (array[0].CategoryID == '1') {
+            temp = 'Camera'
+          }
+          else{
+            temp = 'Lens'
+          }
+          console.log('category : ' + temp)
+          this.state.category = temp
           this.setState({
-              nama : array[0].ProductName
-          })
+              nama : array[0].ProductName,
+              category : temp
+          }, alert(this.state.category))
       }
 
       tampilDetail = async() =>{
@@ -83,7 +126,7 @@ export default class Login extends React.Component {
           url: 'http://lapakkamera.local:8080/handler.php',
           qs: 
           { method: 'executeQuery',
-            query: "SELECT ProductID, ProductName, CategoryID, Price, imgSource FROM PRODUCT where ProductID='" + id + "'" },
+            query: "SELECT ProductID, ProductName, CASE WHEN CategoryID=1 THEN 'Camera' ELSE 'LENS', Price, imgSource FROM PRODUCT where ProductID='" + id + "'" },
           headers: 
           { 'cache-control': 'no-cache',
             Connection: 'keep-alive',
@@ -117,9 +160,18 @@ export default class Login extends React.Component {
                 keyExtractor={(item)=> item.ProductID + item.ProductName}
                  numColumns={2}
             ></FlatList>
+            <TextInput style={styles.input}
+              placeholder="Jumlah"
+              onChangeText={(t) =>  this.changej(t)}
+              value={this.state.password}
+            />
             <Button
               title="Add To Cart"
               onPress={() => this.Add()}
+            />
+            <Button
+              title="Go Back"
+              onPress={() => this.Back()}
             />
           </View>
         );
