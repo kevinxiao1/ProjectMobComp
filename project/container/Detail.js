@@ -43,6 +43,9 @@ export default class Login extends React.Component {
             })
             await AsyncStorage.setItem('Cart', JSON.stringify(arr))
           }
+
+          alert('berhasil add to cart')
+          this.Back();
       }
 
       Back(){
@@ -71,7 +74,7 @@ export default class Login extends React.Component {
             </View>
             <View style={{flex: 1}}>
                 <Text>Name : {item.ProductName}</Text>
-                <Text>Category : {this.state.category}</Text>
+                <Text>Category : {item.CategoryID}</Text>
                 <Text>Price <NumberFormat value={item.Price} displayType={'text'} thousandSeparator={true} prefix={'Rp.'} /></Text>
             </View>
         </View>
@@ -132,12 +135,12 @@ export default class Login extends React.Component {
         var page = this
         let arr = []
         let id = await AsyncStorage.getItem("tampilDetail")
-
+        //CASE WHEN CategoryID=1 THEN 'Camera' ELSE 'LENS'
         var options = { method: 'GET',
           url: 'http://lapakkamera.local:8080/handler.php',
           qs: 
           { method: 'executeQuery',
-            query: "SELECT ProductID, ProductName, CASE WHEN CategoryID=1 THEN 'Camera' ELSE 'LENS', Price, imgSource FROM PRODUCT where ProductID='" + id + "'" },
+            query: "SELECT ProductID, ProductName, CASE WHEN CategoryID='1' THEN 'Camera' Else 'Lens' END as CategoryID , Price, imgSource FROM PRODUCT where ProductID='" + id + "'" },
           headers: 
           { 'cache-control': 'no-cache',
             Connection: 'keep-alive',
