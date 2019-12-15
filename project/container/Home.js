@@ -247,10 +247,13 @@ export default class Home extends React.Component {
 
             <View style={styles.upperPart}>
                 <View style={styles.upperLeft}>
-                    <Text>tes1</Text>
+                <Button
+              title="Logout"
+              onPress={() => this.Logout()}
+            />
                 </View>
                 <View style={styles.logo}>
-                    <Image style= {{margin:5, width : 175, height : 50}}
+                    <Image style= {{width : 150, height: 20}}
                     source={require('../assets/logo-plazakamera-recolor.png')
                     }></Image>
                 </View>
@@ -298,10 +301,6 @@ export default class Home extends React.Component {
                 keyExtractor={(item)=> item.ProductID + item.ProductName}
                  numColumns={2}
             ></FlatList>
-            <Button
-              title="Logout"
-              onPress={() => this.Logout()}
-            />
           </View>
         );
     }

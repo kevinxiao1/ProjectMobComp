@@ -78,15 +78,15 @@ export default class Login extends React.Component {
                 <Text>Category : {item.CategoryID}</Text>
                 <Text>Price <NumberFormat value={item.Price} displayType={'text'} thousandSeparator={true} prefix={'Rp.'} /></Text>
             </View>
-            <View style={{flexDirection:"row", alignItems:"center"}}>
+            <View style={{flexDirection:"row", alignItems:"center", marginBottom:20}}>
               <View>
-              <NumericInput className="form-control" min={0} onChangeText={(t) =>  this.changej(t)} value={this.state.password}/>
+                <NumericInput className="form-control" min={0} onChange={(t) =>  this.changej(t)} value={this.state.password}/>
               </View>
               <View>
-              <Button
-                title="Add To Cart"
-                onPress={() => this.Add()}
-              />
+                <Button
+                  title="Add To Cart"
+                  onPress={() => this.Add()}
+                />
               </View>
             </View>
             
