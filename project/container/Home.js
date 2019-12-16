@@ -2,7 +2,6 @@ import React from 'react';
 import { Ionicons } from '@expo/vector-icons';
 import { StyleSheet, Text, View, Button, TextInput, AsyncStorage, FlatList, TouchableOpacity, Dimensions, Image, Picker} from 'react-native';
 import NumberFormat from 'react-number-format';
-import Icon from 'react-native-ionicons';
 import {NavigationActions, StackActions} from 'react-navigation';
 import { SearchBar } from 'react-native-elements';
 
@@ -215,15 +214,15 @@ export default class Home extends React.Component {
             Accept: '*/*',
             'User-Agent': 'PostmanRuntime/7.19.0' } };
 
-        request(options, function (error, response, body) {
-          if (error) throw new Error(error);
+        // request(options, function (error, response, body) {
+        //   if (error) throw new Error(error);
 
-          arr = JSON.parse(body);
-          page.setState({
-            products : arr
-          })
-          console.log(page.state.products)
-        });
+        //   arr = JSON.parse(body);
+        //   page.setState({
+        //     products : arr
+        //   })
+        //   console.log(page.state.products)
+        // });
 
       }
 
