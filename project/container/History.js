@@ -20,11 +20,11 @@ export default class History extends React.Component {
         return (
           
           <View style={styles.container}>
-            {/* <Text style={{fontWeight : "bold", color:"blue", fontSize : 20}}>History Page</Text> */}
+            
             <View style={styles.upperPart}>
                 <View style={styles.upperLeft}>
                 <Button
-              title="Logout"
+              title="Back"
               //onPress={() => this.Logout()}
             />
                 </View>
@@ -39,17 +39,19 @@ export default class History extends React.Component {
                     </TouchableOpacity>
                 </View>
             </View>
+            <Text style={{fontWeight : "bold", color:"blue", fontSize : 20}}>History Page</Text>
           </View>
         );
     }
 }
 
+const layar = Dimensions.get('window')
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
     alignItems: 'center',
-    justifyContent: 'center',
+    //justifyContent: 'center',
     width: '100%',
       height: '100%',
   },

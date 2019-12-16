@@ -84,36 +84,36 @@ export default class Login extends React.Component {
     }
 
     getFromAPI(){
-        var data = new FormData();
-        data.append('param', 0);
+        // var data = new FormData();
+        // data.append('param', 0);
 
-        const arg = {
-            method: 'POST',
-            header: {
-                'Content-Type': 'multipart/form-data',
-            },
-            body: data,
-        }
+        // const arg = {
+        //     method: 'POST',
+        //     header: {
+        //         'Content-Type': 'multipart/form-data',
+        //     },
+        //     body: data,
+        // }
         
-        try{
-            const response = await fetch('http://lapakkamera.local/MobileComputing/ProjectMobComb/project/php/Register.php', arg);
-            const responseJSON = await response.json();
-            console.log(responseJSON);
-            // this.setState({listProduct: responseJSON});
-        }catch(error){
-            console.log(error);
-        }
+        // try{
+        //     const response = await fetch('http://lapakkamera.local/ProjectMobComp/project/php/Register.php', arg);
+        //     const responseJSON = await response.json();
+        //     console.log(responseJSON);
+        //     // this.setState({listProduct: responseJSON});
+        // }catch(error){
+        //     console.log(error);
+        // }
         let request = require("request");
 
         var options = { method: 'GET',
           url: 'http://lapakkamera.local:8080/handler.php',
           qs: { method: 'executeQuery', query: 'select * from user' }};
 
-        request(options, function (error, response, body) {
-          if (error) throw new Error(error);
+        // request(options, function (error, response, body) {
+        //   if (error) throw new Error(error);
 
-          console.log(JSON.parse(body));
-        });
+        //   console.log(JSON.parse(body));
+        // });
 
     }
 

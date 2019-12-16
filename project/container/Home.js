@@ -380,7 +380,8 @@ const styles = StyleSheet.create({
         // alignItems : 'center',
         // justifyContent : 'center'
          alignItems : 'flex-start',
-         justifyContent : 'flex-start'
+         justifyContent : 'flex-start',
+         width:'100%'
        },
 
 
