@@ -1,6 +1,8 @@
 import React from 'react';
+import { Ionicons } from '@expo/vector-icons';
 import { StyleSheet, Text, View, Button, TextInput, AsyncStorage, FlatList, TouchableOpacity, Image, Dimensions} from 'react-native';
 import NumberFormat from 'react-number-format';
+import Icon from 'react-native-ionicons';
 import {NavigationActions, StackActions} from 'react-navigation';
 import NumericInput from 'react-numeric-input';
 

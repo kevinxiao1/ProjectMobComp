@@ -2,7 +2,7 @@ import React from 'react';
 import { Ionicons } from '@expo/vector-icons';
 import { StyleSheet, Text, View, Button, TextInput, AsyncStorage, FlatList, TouchableOpacity, Dimensions, Image, Picker} from 'react-native';
 import NumberFormat from 'react-number-format';
-import Icon from 'react-native-ionicons'
+import Icon from 'react-native-ionicons';
 import {NavigationActions, StackActions} from 'react-navigation';
 import { SearchBar } from 'react-native-elements';
 
