@@ -23,12 +23,14 @@ export default class Login extends React.Component {
       }
       Add = async() =>{
           let arr = await AsyncStorage.getItem('Cart')
-
+          let yglogin = await AsyncStorage.getItem('yglogin')
           if (arr != null) {
             arr =JSON.parse(arr)
             arr.push({
-              ygbeli : AsyncStorage.getItem('yglogin'),
-              id : this.state.products[0].ProductID,
+              ygbeli : yglogin,
+              name : this.state.products[0].ProductName,
+              category : this.state.products[0].CategoryID,
+              img : this.state.products[0].imgSource,
               jumlah : this.state.jumlah,
               harga : this.state.products[0].Price * this.state.jumlah
             })
@@ -38,8 +40,10 @@ export default class Login extends React.Component {
           else{
             arr = []
             arr.push({
-              ygbeli : AsyncStorage.getItem('yglogin'),
-              id : this.state.products[0].ProductID,
+              ygbeli : yglogin,
+              name : this.state.products[0].ProductName,
+              category : this.state.products[0].CategoryID,
+              img : this.state.products[0].imgSource,
               jumlah : this.state.jumlah,
               harga : this.state.products[0].Price * this.state.jumlah
             })
