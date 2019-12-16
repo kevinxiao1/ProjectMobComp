@@ -253,13 +253,13 @@ export default class Home extends React.Component {
             />
                 </View>
                 <View style={styles.logo}>
-                    <Image style= {{width : 150, height: 20}}
+                    <Image style= {{width : 175, height: 50}}
                     source={require('../assets/logo-plazakamera-recolor.png')
                     }></Image>
                 </View>
                 <View style={styles.cart}>
                   <TouchableOpacity onPress={() =>this.toCart()}>
-                    <Ionicons name ="md-cart" size={50} color ="grey"/>
+                    <Ionicons name ="md-cart" size={30} color ="grey"/>
                     </TouchableOpacity>
                 </View>
             </View>
