@@ -266,6 +266,7 @@ export default class Home extends React.Component {
 
             <View style={styles.search}>
                 <View style={styles.searchstyle}>
+                  
                     <SearchBar
                     // leftIconContainerStyle={{backgroundColor:'white'}}
                     
