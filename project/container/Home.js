@@ -255,20 +255,22 @@ export default class Home extends React.Component {
             />
                 </View>
                 <View style={styles.logo}>
-                    <Image style= {{width : 150, height: 20}}
+                    <Image style= {{width : 175, height: 50}}
                     source={require('../assets/logo-plazakamera-recolor.png')
                     }></Image>
                 </View>
                 <View style={styles.cart}>
                   <TouchableOpacity onPress={() =>this.toCart()}>
-                    <Ionicons name ="md-cart" size={50} color ="grey"/>
+                    <Ionicons name ="md-cart" size={30} color ="grey"/>
                     </TouchableOpacity>
                 </View>
             </View>
 
-            <View style={styles.search}>
-                <View style={styles.searchstyle}>
+            <View style={{flexDirection: "row", justifyContent: "center",alignContent:"center", alignItems:"center", margin: 20, flex: 1, width: '90%'}}>
+                <View style={{flex: 1}}>
+                  {/* <input type="text" placeholder={'Search'} onChangeText={this.updateSearch}/> */}
                     <SearchBar
+                    style={{width: '100%'}}
                     // leftIconContainerStyle={{backgroundColor:'white'}}
                     
                     //   inputStyle={{backgroundColor: 'white'}}
@@ -278,11 +280,17 @@ export default class Home extends React.Component {
                       value={search}
                     />
                 </View>
-                <View style={styles.stylebutton}>
-                    <Button title="Search" onPress={() => {this.cari()}}></Button>
+                <View >
+                    <TouchableOpacity onPress={() => {this.cari()}}>
+                      <Ionicons name ="md-search" size={30} color ="grey"/>
+                    </TouchableOpacity>
+                    {/* <Button onPress={() => {this.cari()}}></Button> */}
                 </View>
-                <View style={styles.stylebutton}>
-                    <Button title="Reset" onPress={() => {this.getProduct()}}></Button>
+                <View>
+                    <TouchableOpacity onPress={() => {this.getProduct()}}>
+                      <Ionicons name ="md-close" size={30} color ="grey"/>
+                    </TouchableOpacity>
+                    {/* <Button title="Reset" onPress={() => {this.getProduct()}}></Button> */}
                 </View>
                 
             </View>
@@ -382,7 +390,8 @@ const styles = StyleSheet.create({
         // alignItems : 'center',
         // justifyContent : 'center'
          alignItems : 'flex-start',
-         justifyContent : 'flex-start'
+         justifyContent : 'flex-start',
+         width:'100%'
        },
 
 

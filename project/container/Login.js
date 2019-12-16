@@ -19,7 +19,7 @@ export default class Login extends React.Component {
 
       Login = async() =>{
         //untuk non database = uncomment dibawah ini
-        //this.props.navigation.navigate('TabNavigator');
+        this.props.navigation.navigate('TabNavigator');
 
         if (this.state.username == "admin" && this.state.password == "admin") {
           
@@ -46,7 +46,8 @@ export default class Login extends React.Component {
               // 'Postman-Token': 'ad5f38f5-182e-4c22-b989-af7d918743f2,2e5ad3d2-f07e-49fb-9e94-278a2df8d0da',
               'Cache-Control': 'no-cache',
               Accept: '*/*',
-              'User-Agent': 'PostmanRuntime/7.19.0' } };
+              //'User-Agent': 'PostmanRuntime/7.19.0' 
+            } };
 
           request(options, function (error, response, body) {
             if (error) throw new Error(error);
@@ -96,7 +97,7 @@ export default class Login extends React.Component {
         // }
         
         // try{
-        //     const response = await fetch('http://lapakkamera.local/MobileComputing/ProjectMobComb/project/php/Register.php', arg);
+        //     const response = await fetch('http://lapakkamera.local/ProjectMobComp/project/php/Register.php', arg);
         //     const responseJSON = await response.json();
         //     console.log(responseJSON);
         //     // this.setState({listProduct: responseJSON});
@@ -109,11 +110,11 @@ export default class Login extends React.Component {
           url: 'http://lapakkamera.local:8080/handler.php',
           qs: { method: 'executeQuery', query: 'select * from user' }};
 
-        request(options, function (error, response, body) {
-          if (error) throw new Error(error);
+        // request(options, function (error, response, body) {
+        //   if (error) throw new Error(error);
 
-          console.log(JSON.parse(body));
-        });
+        //   console.log(JSON.parse(body));
+        // });
 
     }
 
