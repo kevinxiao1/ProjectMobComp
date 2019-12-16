@@ -214,15 +214,15 @@ export default class Home extends React.Component {
             Accept: '*/*',
             'User-Agent': 'PostmanRuntime/7.19.0' } };
 
-        // request(options, function (error, response, body) {
-        //   if (error) throw new Error(error);
+        request(options, function (error, response, body) {
+          if (error) throw new Error(error);
 
-        //   arr = JSON.parse(body);
-        //   page.setState({
-        //     products : arr
-        //   })
-        //   console.log(page.state.products)
-        // });
+          arr = JSON.parse(body);
+          page.setState({
+            products : arr
+          })
+          console.log(page.state.products)
+        });
 
       }
 
