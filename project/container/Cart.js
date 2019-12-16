@@ -3,8 +3,8 @@ import { StyleSheet, Text, View, Button, TextInput, AsyncStorage,FlatList, Touch
 import { Ionicons } from '@expo/vector-icons';
 import {NavigationActions, StackActions} from 'react-navigation';
 import NumericInput from 'react-numeric-input';
-import Moment from 'moment';
-import moment from 'moment';
+import NumberFormat from 'react-number-format';
+
 
 export default class History extends React.Component {
     constructor(props){
@@ -130,14 +130,16 @@ export default class History extends React.Component {
             })
           }
           <Text>Total : <NumberFormat value={this.state.total} displayType={'text'} thousandSeparator={true} prefix={'Rp.'} /></Text> 
-          <Button
+          
+          <View style={styles.stylebutton}><Button
             title="Bayar"
             onPress={() => this.Pay()}
           />
-            <Button
+          </View>
+            {/* <Button
             title="Go Back"
             onPress={() => this.Back()}
-          />
+          /> */}
 
 
         {/* <FlatList
@@ -222,9 +224,21 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
     alignItems: 'center',
-    justifyContent: 'center',
-    width: '100%',
-      height: '100%',
+    //justifyContent: 'center',
+    //width: '100%',
+    //  height: '100%',
+  },
+  input : {
+    borderRadius : '5%',
+    borderColor : 'black',
+    margin : 3,
+    height:40,
+    width:200,
+    borderWidth : 2,
+  },
+  stylebutton:
+  {
+    width:200
   },
   upperPart:
       {

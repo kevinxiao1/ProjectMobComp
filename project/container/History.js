@@ -16,8 +16,15 @@ export default class History extends React.Component {
         }
       }
 
+      Back(){
+        this.props.navigation.navigate('TabNavigator')
+      }
       componentWillMount(){
         this.getFromAPI()
+      }
+
+      toCart(){
+        this.props.navigation.navigate('Cart')
       }
 
       getFromAPI = async() =>{
@@ -56,15 +63,15 @@ export default class History extends React.Component {
       render() {
         return (
           
-          <View style={styles.container}>
+          <View>
             
             <View style={styles.upperPart}>
                 <View style={styles.upperLeft}>
                 <Button
               title="Back"
-              //onPress={() => this.Logout()}
+              onPress={() => this.Back()}
             />
-                </View>
+            </View>
                 <View style={styles.logo}>
                     <Image style= {{width : 175, height: 50}}
                     source={require('../assets/logo-plazakamera-recolor.png')
@@ -76,7 +83,12 @@ export default class History extends React.Component {
                     </TouchableOpacity>
                 </View>
             </View>
+            <br></br>
+            <View style={styles.container}>
+
+            
             <Text style={{fontWeight : "bold", color:"blue", fontSize : 20}}>History Page</Text>
+            <br></br>
 
             {
             this.state.history.map((el,idx) => {
@@ -84,16 +96,17 @@ export default class History extends React.Component {
               <TouchableOpacity style={styles.productContainer}
                 >
                     <View style={{flex: 3, justifyContent:'center'}}>
-                    <Text>{el.TransDate}</Text>
+                      <Text style={{fontSize: 30, fontWeight: "bold"}} >{el.TransDate}</Text>
                     </View>
                     <View style={{flex: 1, justifyContent:'center'}}>
                         
-                        <Text><NumberFormat value={el.Total} displayType={'text'} thousandSeparator={true} prefix={'Rp.'} /></Text> 
+                        <Text style={{fontSize: 20}}><NumberFormat value={el.Total} displayType={'text'} thousandSeparator={true} prefix={'Rp.'} /></Text> 
                     </View>
                 </TouchableOpacity>
               )
             })
           }
+          </View>
           </View>
         );
     }
@@ -108,6 +121,13 @@ const styles = StyleSheet.create({
     //justifyContent: 'center',
     width: '100%',
       height: '100%',
+  },
+  productContainer:{
+    marginTop : 20,
+    borderWidth: 1,
+    borderRadius: 20,
+    alignItems: "center",
+    justifyContent: "center"
   },
   upperPart:
       {
