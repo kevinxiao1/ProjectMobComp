@@ -109,11 +109,11 @@ export default class Login extends React.Component {
           url: 'http://lapakkamera.local:8080/handler.php',
           qs: { method: 'executeQuery', query: 'select * from user' }};
 
-        request(options, function (error, response, body) {
-         // if (error) throw new Error(error);
+        // request(options, function (error, response, body) {
+        //   if (error) throw new Error(error);
 
-          console.log(JSON.parse(body));
-        });
+        //   console.log(JSON.parse(body));
+        // });
 
     }
 
