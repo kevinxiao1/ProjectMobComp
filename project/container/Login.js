@@ -51,7 +51,7 @@ export default class Login extends React.Component {
           request(options, function (error, response, body) {
             if (error) throw new Error(error);
 
-            console.log(JSON.parse(body));
+            console.log(body);
 
             arr = JSON.parse(body);
             for (let i = 0; i < arr.length; i++) {

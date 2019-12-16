@@ -14,7 +14,7 @@ export default class Home extends React.Component {
           status : '',
           search: '',
           mode : '',
-          //products : [],
+          products : [],
         }
       }
 
@@ -154,8 +154,9 @@ export default class Home extends React.Component {
         <TouchableOpacity style={styles.productContainer}
         onPress={() =>this.toDetail(item.ProductID)}>
             <View style={{flex: 3, justifyContent:'center'}}>
+              
                 <Image
-                    style={{width: 100}}
+                    style={{width: 150,height:150}}
                     source={require('../assets/' + item.imgSource)}
                 ></Image>
             </View>
@@ -166,31 +167,32 @@ export default class Home extends React.Component {
         </TouchableOpacity>
       )
 
-      mapProduct(){
-        const data = this.state.products;
-        let listsrc = [];
-        for (let i = 0; i < data.length; i++) {
-          listsrc.push(data[i].imgSource)
-        }
-        let list = data.map((item,idx) => {
-            return(
-              <TouchableOpacity style={styles.productContainer}
-              onPress={()=> alert(item.ProductID)}>
-                  <View style={{flex: 3, justifyContent:'center'}}>
-                      <Image
-                          style={{width: 200, height: 200}}
-                          source={require('../assets/' + item.imgSource)}
-                      ></Image>
-                  </View>
-                  <View style={{flex: 1, justifyContent:'center'}}>
-                      <Text>{item.ProductName}</Text>
-                      <Text><NumberFormat value={item.Price} displayType={'text'} thousandSeparator={true} prefix={'Rp.'} /></Text> 
-                  </View>
-              </TouchableOpacity>
-            )
+    //   mapProduct(){
+    //     const data = this.state.products;
+    //     let listsrc = [];
+    //     for (let i = 0; i < data.length; i++) {
+    //       listsrc.push(data[i].imgSource)
+    //     }
+    //     let list = data.map((item,idx) => {
+    //         return(
+    //           <TouchableOpacity style={styles.productContainer}
+    //           onPress={()=> alert(item.ProductID)}>
+    //               <View style={{flex: 3, justifyContent:'center'}}>
+    //                   <Image
+    //                       style={{width: 200, height: 200}}
+    //                       source={require('../assets/' + item.imgSource)}
+    //                   ></Image>
+    //               </View>
+    //               <View style={{flex: 1, justifyContent:'center'}}>
+    //                   <Text>{item.ProductName}</Text>
+    //                   <Text><NumberFormat value={item.Price} displayType={'text'} thousandSeparator={true} prefix={'Rp.'} /></Text> 
+
+    //               </View>
+    //           </TouchableOpacity>
+    //         )
   
-        })
-    }
+    //     })
+    // }
 
 
       getProduct(){
