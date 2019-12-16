@@ -19,7 +19,7 @@ export default class Login extends React.Component {
 
       Login = async() =>{
         //untuk non database = uncomment dibawah ini
-        //this.props.navigation.navigate('TabNavigator');
+        this.props.navigation.navigate('TabNavigator');
 
         if (this.state.username == "admin" && this.state.password == "admin") {
           
