@@ -2,6 +2,7 @@ import React from 'react';
 import { Ionicons } from '@expo/vector-icons';
 import { StyleSheet, Text, View, Button, TextInput, AsyncStorage, FlatList, TouchableOpacity, Dimensions, Image, Picker} from 'react-native';
 import NumberFormat from 'react-number-format';
+import Icon from 'react-native-ionicons'
 import {NavigationActions, StackActions} from 'react-navigation';
 import { SearchBar } from 'react-native-elements';
 
@@ -155,7 +156,7 @@ export default class Home extends React.Component {
         onPress={() =>this.toDetail(item.ProductID)}>
             <View style={{flex: 3, justifyContent:'center'}}>
                 <Image
-                    style={{width: 100}}
+                    style={{width: 150, height: 150}}
                     source={require('../assets/' + item.imgSource)}
                 ></Image>
             </View>
@@ -264,9 +265,11 @@ export default class Home extends React.Component {
                 </View>
             </View>
 
-            <View style={styles.search}>
-                <View style={styles.searchstyle}>
+            <View style={{flexDirection: "row", justifyContent: "center",alignContent:"center", alignItems:"center", margin: 20, flex: 1, width: '90%'}}>
+                <View style={{flex: 1}}>
+                  {/* <input type="text" placeholder={'Search'} onChangeText={this.updateSearch}/> */}
                     <SearchBar
+                    style={{width: '100%'}}
                     // leftIconContainerStyle={{backgroundColor:'white'}}
                     
                     //   inputStyle={{backgroundColor: 'white'}}
@@ -276,11 +279,17 @@ export default class Home extends React.Component {
                       value={search}
                     />
                 </View>
-                <View style={styles.stylebutton}>
-                    <Button title="Search" onPress={() => {this.cari()}}></Button>
+                <View >
+                    <TouchableOpacity onPress={() => {this.cari()}}>
+                      <Ionicons name ="md-search" size={30} color ="grey"/>
+                    </TouchableOpacity>
+                    {/* <Button onPress={() => {this.cari()}}></Button> */}
                 </View>
-                <View style={styles.stylebutton}>
-                    <Button title="Reset" onPress={() => {this.getProduct()}}></Button>
+                <View>
+                    <TouchableOpacity onPress={() => {this.getProduct()}}>
+                      <Ionicons name ="md-close" size={30} color ="grey"/>
+                    </TouchableOpacity>
+                    {/* <Button title="Reset" onPress={() => {this.getProduct()}}></Button> */}
                 </View>
                 
             </View>

@@ -46,7 +46,8 @@ export default class Login extends React.Component {
               // 'Postman-Token': 'ad5f38f5-182e-4c22-b989-af7d918743f2,2e5ad3d2-f07e-49fb-9e94-278a2df8d0da',
               'Cache-Control': 'no-cache',
               Accept: '*/*',
-              'User-Agent': 'PostmanRuntime/7.19.0' } };
+              //'User-Agent': 'PostmanRuntime/7.19.0' 
+            } };
 
           request(options, function (error, response, body) {
             if (error) throw new Error(error);
@@ -71,7 +72,7 @@ export default class Login extends React.Component {
             else{
               alert("berhasil Login")
               page.toTab();
-              response(NavigationActions.navigate({ routeName: 'TabNavigator' }));
+              //response(NavigationActions.navigate({ routeName: 'TabNavigator' }));
               navigator.navigate('TabNavigator');
             }
           }
